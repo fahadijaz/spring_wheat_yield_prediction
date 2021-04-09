@@ -73,7 +73,7 @@
 %% The abstract is a short summary of the work to be presented in the
 %% article.
 \begin{abstract}
-  This report is a part of vPheno (virtual phenotyping) project at NMBU that started in 2017. The aim of the project is to reduce the time it takes to develop more robust cultivars. So, using the data that has been collected as part of this project from 2017, I tried to develop a few machine learning models to predict the grain yield of spring wheat, using the data extracted from the images taken by Unmanned Aerial Vehicles (UAVs). The features extracted from the images were fed into the machine learning algorithm that predicted the yield. The results are discussed, and suggestion are included to improve the data collection methods and, consequently, the results for future studies.
+  This report is a part of vPheno (virtual phenotyping) project at NMBU that started in 2017. The aim of the project is to reduce the time it takes to develop more robust cultivars. So, using the data that has been collected as part of this project from 2017, I tried to develop machine learning models to predict the grain yield of spring wheat, using the data extracted from the images taken by Unmanned Aerial Vehicles (UAVs). The features extracted from the images were fed into the machine learning algorithm that predicted the yield. The results are discussed, and suggestion are included to improve the data collection methods and, consequently, the results for future studies.
 \end{abstract}
 \todo{check all reference have Text 'Table' where cited in text}
 
@@ -85,25 +85,30 @@
 
 \section{Introduction}\label{sec:intro}
 
-The world population is increasing as never before and so is the global food demand. Wheat is the most important food source all around the world \cite{Igrejas2020}. The global demand for wheat is projected to more than double by the year 2050 \cite{tilman}. This stresses the need for the increase in yield of food crops.
-There are several methods for increasing the yield of wheat. The most common and traditional is based on the yield of the crop. The crop is cultivated, yield is calculated which is used to make decision if that crop is to be used for breeding or not. This is a very time-consuming process and involves a substantial cost as well. In this fast pace innovation age, there is a high demand to speed up the processes that can improve yield. Remote sensing systems can be deployed to get the information in real time and then the data collected can be used to predict the yield. One such technique is to deploy Unmanned Aerial Vehicles (UAVs) to gather data from the field. That data is used to then predict different characteristics of the plants. Those traits include grain yield as well. My goal is to develop a model which can predict the yield of the crop with greater accuracy.\todo{todo}
+The world population is increasing rapidly \todo{ref??} and so is the global food demand. Wheat is the most important food source all around the world \cite{Igrejas2020}. The global demand for wheat is projected to more than double by the year 2050 \cite{tilman}. This stresses the need for the increase in yield of food crops.
+\todo{connect the sentences in the paragraph following. Hans}
+There are several methods for increasing the yield of wheat. The most common and traditional is based on the yield of the crop.\todo{Are there other methods? give a ref to the brfeeding practices}
+ The crop is cultivated, yield is calculated which is used to make decision if that crop is to be used for breeding or not. This is a very time-consuming process\todo{Can you give numbers for how long this takes, both for a single experiment and for actually developing an improved strain?} and involves a substantial cost as well. In this fast pace innovation age, there is a high demand to speed up the processes that can improve yield. \todo{"fast pace innovation age" is dangerously close to "blurb" that may fit in marketing brochures but not in scientific reports. Furthermore, as you point out above, the motivation to speed up wheat development is not to keep up with the speed of innovation in Silicon Valley, but plain and simple to have a chance to feed the world.}
 
 
-\subsection{Problem Definition}\label{sec:aspect1}
+Remote sensing systems can be deployed to get the information in real time and then the data collected can be used to predict the yield. One such technique is to deploy Unmanned Aerial Vehicles (UAVs) to gather data from the field. That data is used to then predict different characteristics of the plants. Those traits include grain yield as well. My goal is to develop a model which can predict the yield of the crop with greater accuracy.\todo{redefine goal}
+
+
+\subsection{Problem Definition}\label{sec:problem_def}
 
 Since the cultivated land is limited and it costs a lot to convert barren land to cultivable, the better approach would be to focus on increasing the yield from the existing cultivable land. Moreover, cultivating more land would naturally cost more than cultivating less land and getting more production. So, the reason and motivation behind plants phenotyping is to increase the yield from the same fields. Regular phenotyping approached are slow and costly. Using remote sensing for this can be fast and cheap. That is the motivation behind the vPheno project at NMBU that aims at reducing the time?? required to experiment with different varieties of wheat and enable them to do accurate selection of potential varieties of wheat. Machine learning algorithms will be used for this purpose.
-This report contributes to the research project vPheno (virtual phenomics) at the Faculty of Bioscience at NMBU. The project, started in 2017, aims to help plant breeders reduce the time required to select better, high yield varieties of crops and speedup the process using image analysis techniques. There have been a few studies at NMBU in 2017 \cite{burud_bleken}, 2018 \cite{grindbakken} and 2019 \cite{lied}. This report explores a different way of combining data, collected for different fields at different occasions. Moreover, including data for the year 2019 as input as well that has recently become available.\todo{Include 2020 data as well, probably or just use robot.}
-
-\subsection{Goals & Objectives}\label{sec:aspect1}
-
-The objective of this report is to generate a machine learning model that could predict the grain yield of wheat based on the image data collected from the field at different times during the season.
-
-\section{Theory & Background}\label{sec:theory}
+This report contributes to the research project vPheno (virtual phenomics) at the Faculty of Bioscience at NMBU. The project, started in 2017, aims to help plant breeders reduce the time required to select better, high yield varieties of crops and speedup the process using image analysis techniques. There have been a few studies at NMBU by \citet{burud_bleken}, \citet{grindbakken} and \citet{lied}. This report explores a different way of combining data, collected for different fields at different occasions. Moreover, including data for the year 2019 as input as well that has recently become available.\todo{Include 2020 data as well, probably or just use robot.}
 
 
-\subsection{Plant Phenotyping}\label{sec:aspect1}
+The objective of this report is to generate a machine learning model that can predict the grain yield of wheat based on the image data collected from the field at different times during the season.
+\todo{After this paragraph, provide a brief overview over the paper: what is in which section?}
 
-Plant phenotyping is the study of how traits of the plants, termed as phenome, develop from their interaction with the environment and how their genome can be related to those traits \cite{minervini}. These traits include, among other, the plant yield, maturity time, plant height, etc. The importance of phenotyping has increased significantly with the increased demand for improving the yield.
+
+\section{Theory}\label{sec:theory}
+
+\subsection{Plant Phenotyping}\label{sec:plant_pheno}
+
+Plant phenotyping is the study of how traits of the plants, termed as phenome, develop from their interaction with the environment and how their genome can be related to those traits \cite{minervini}. These traits include, among others, the plant yield, maturity time, plant height, etc. The importance of phenotyping has increased significantly with the increased demand for improving the yield.
 Plant phenotyping investigates how a plant's genome affects the observable traits of a plant (phenome). It is becoming increasingly important in our quest towards efficient and sustainable agriculture. While sequencing the genome is becoming increasingly efficient, acquiring phenotype information has remained of low throughput. 
 Image based phenotyping are fast and nondestructive. They can predict the results and save time to make decision about the choice of the variety of wheat to be chosen for the next phase
 
@@ -402,100 +407,6 @@ The results from a previous study on the similar data \cite{lied}, had varying d
 
 The models performed well, and the evaluation results were close to each other. There were not any major differences between the results. This indicates that the hyperparameters tuning can improve the accuracy to some extent but not by a landslide. More data can help in improving the results, in addition to defining and collecting more features related to the crop, and the conditions surrounding it.
 
-\section{Theory}\label{sec:theory}
-Provide the theoretical background for your work. You can use
-subsections. You can also provide information on existing
-methods here, if you want to compare new methods to established methods.
-
-
-\subsection{Aspect 1}\label{sec:aspect1}
-
-\begin{listing}
-  % Pseudocode caption above the code.
-  \caption{Insertion sort algorithm from \citet[Ch.~2.1]{CLRS_2009}.
-    You can also include Python code. \textbf{Use code listings sparingly!}
-    }
-  \label{lst:insertion_algo}
-  %
-  % For documentation on how to typeset CLRS-style pseudocode, see
-  % https://www.cs.dartmouth.edu/~thc/clrscode/clrscode3e.pdf
-  %
-  \begin{codebox}
-    \Procname{$\proc{Insertion-Sort}(A)$}
-    \li \For $j \gets 2$ \To $\attrib{A}{length}$
-    \li \Do
-    $\id{key} \gets A[j]$
-    \li     $i \gets j-1$
-    \li      \While $i>0$ and $A[i] > \id{key}$
-    \li      \Do
-    $A[i+1] \gets A[i]$
-    \li         $i \gets i-1$
-    \End    
-    \li       $A[i+1]\gets \id{key}$
-    \End
-  \end{codebox}
-\end{listing}
-
-Pseudocode for the first algorithm is shown in
-Listing~\ref{lst:insertion_algo}. Best case runtime for this algorithm
-is
-
-\begin{equation}
-  T(n) = \Theta(n) \;.  \label{eq:ins_sort_best}
-\end{equation}
-
-It is achieved for correctly sorted input data.
-
-\subsection{Aspect 2}\label{sec:aspect2}
-
-Lorem ipsum \dots
-
-
-\section{Methods}\label{sec:methods}
-
-In this section, describe methods you will use for preparing and
-analysing data. Be precise!
-
-\begin{table}
-  % Table captions always come *above* the table.
-  \caption{Versions of files used for this report; GitLab repository
-    \url{https://x.y.z}.}
-  \label{tab:hashes}
-  \begin{tabular}{ll}
-    \hline
-    File & Git hash \\\hline
-    \verb!run_bench.ipynb! & \verb!42a44d2a6! \\
-    \verb!results.pkl! & \verb!65342aed2! \\\hline
-  \end{tabular}
-\end{table}
-
-\section{Results}\label{sec:results}
-
-\begin{figure}
-  \centering
-  \includegraphics{sample_plot}
-  % figure captions below figure
-  \caption{Benchmark results for \dots.}
-  \label{fig:bench}
-\end{figure}
-
-Here, you should present your results. Provide clear figures with tidy
-lettering in legible font sizes. Figures should not be resized when
-included, so prepare them for the column width of 84~mm. For good
-quality, export figures as PDF files from Python.
-
-The results section should be divided into several subsections.
-
-\section{Discussion}\label{sec:discussion}
-
-In this section, you should summarize your results and compare them to
-expectations from theory presented in Sec.~\ref{sec:theory} and to
-previous knowledge.
-
-\section{Conclusion}\label{sec:conclusion}
-
-Sum up the key results of your work and sketch perspectives for future work.
-
 % In the acks section, you can thank people for help.
 \begin{acks}
 We are grateful to \dots for \dots.
@@ -505,7 +416,7 @@ We are grateful to \dots for \dots.
 %% The next two lines define the bibliography style to be used, and
 %% the bibliography file.
 \bibliographystyle{ACM-Reference-Format}
-\bibliography{references.bib}
+\bibliography{\references.bib}
 
 \end{document}
 
