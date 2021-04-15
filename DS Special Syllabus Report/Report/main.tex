@@ -73,7 +73,7 @@
 %% The abstract is a short summary of the work to be presented in the
 %% article.
 \begin{abstract}
-  This report is a part of vPheno (virtual phenotyping) project at NMBU that started in 2017. The aim of the project is to reduce the time it takes to develop more robust cultivars. So, using the data that has been collected as part of this project from 2017, I tried to develop machine learning models to predict the grain yield of spring wheat, using the data extracted from the images taken by Unmanned Aerial Vehicles (UAVs). The features extracted from the images were fed into the machine learning algorithm that predicted the yield. The results are discussed, and suggestion are included to improve the data collection methods and, consequently, the results for future studies.
+  This report is a part of the vPheno (virtual phenotyping) project at NMBU that started in 2017. The aim of the project is to reduce the time it takes to develop more robust cultivars. So, using the data that has been collected as part of this project from 2017, I tried to develop machine learning models to predict the grain yield of spring wheat, using the data extracted from the images taken by Unmanned Aerial Vehicles (UAVs). The features extracted from the images were fed into the machine learning algorithm that predicted the yield. The results are discussed, and suggestion are included to improve the data collection methods and, consequently, the results for future studies.
 \end{abstract}
 \todo{check all reference have Text 'Table' where cited in text}
 
@@ -85,19 +85,19 @@
 
 \section{Introduction}\label{sec:intro}
 
-The world population is increasing rapidly \todo{ref??} and so is the global food demand. Wheat is the most important food source all around the world \cite{Igrejas2020}. The global demand for wheat is projected to more than double by the year 2050 \cite{tilman}. This stresses the need for the increase in yield of food crops.
-\todo{connect the sentences in the paragraph following. Hans}
-There are several methods for increasing the yield of wheat. The most common and traditional is based on the yield of the crop.\todo{Are there other methods? give a ref to the brfeeding practices}
- The crop is cultivated, yield is calculated which is used to make decision if that crop is to be used for breeding or not. This is a very time-consuming process\todo{Can you give numbers for how long this takes, both for a single experiment and for actually developing an improved strain?} and involves a substantial cost as well. In this fast pace innovation age, there is a high demand to speed up the processes that can improve yield. \todo{"fast pace innovation age" is dangerously close to "blurb" that may fit in marketing brochures but not in scientific reports. Furthermore, as you point out above, the motivation to speed up wheat development is not to keep up with the speed of innovation in Silicon Valley, but plain and simple to have a chance to feed the world.}
+Wheat is the most important food source all around the world \cite{Igrejas2020}. The global demand for wheat is projected to more than double by the year 2050 \cite{tilman}. This stresses the need for the increase in yield of food crops.
 
+There are several methods for increasing the yield of wheat, e.g. cross breeding and selection. The most common and traditional is based on the yield of the crop.
+
+The crop is cultivated, yield is calculated which is used to make decision if that crop is to be used for breeding or not. This is a very time-consuming process and involves a substantial cost as well. In this fast pace innovation age, there is a high demand to speed up the processes that can improve yield.
 
 Remote sensing systems can be deployed to get the information in real time and then the data collected can be used to predict the yield. One such technique is to deploy Unmanned Aerial Vehicles (UAVs) to gather data from the field. That data is used to then predict different characteristics of the plants. Those traits include grain yield as well. My goal is to develop a model which can predict the yield of the crop with greater accuracy.\todo{redefine goal}
 
 
-\subsection{Problem Definition}\label{sec:problem_def}
 
-Since the cultivated land is limited and it costs a lot to convert barren land to cultivable, the better approach would be to focus on increasing the yield from the existing cultivable land. Moreover, cultivating more land would naturally cost more than cultivating less land and getting more production. So, the reason and motivation behind plants phenotyping is to increase the yield from the same fields. Regular phenotyping approached are slow and costly. Using remote sensing for this can be fast and cheap. That is the motivation behind the vPheno project at NMBU that aims at reducing the time?? required to experiment with different varieties of wheat and enable them to do accurate selection of potential varieties of wheat. Machine learning algorithms will be used for this purpose.
-This report contributes to the research project vPheno (virtual phenomics) at the Faculty of Bioscience at NMBU. The project, started in 2017, aims to help plant breeders reduce the time required to select better, high yield varieties of crops and speedup the process using image analysis techniques. There have been a few studies at NMBU by \citet{burud_bleken}, \citet{grindbakken} and \citet{lied}. This report explores a different way of combining data, collected for different fields at different occasions. Moreover, including data for the year 2019 as input as well that has recently become available.\todo{Include 2020 data as well, probably or just use robot.}
+Since cultivated land is limited and it costs a lot to cultivate barren land, the better approach would be to focus on increasing the yield from the existing cultivable land. Moreover, cultivating more land would naturally cost more than cultivating less land and increasing productivity. So, the reason and motivation behind plant phenotyping is to increase the yield from the same fields. Regular phenotyping approaches are slow and costly. Using remote sensing for this purpose can be fast and cheap. That is the motivation behind the vPheno project at NMBU that aims at reducing the cost of the process to experiment with different varieties of wheat and enable them to do accurate selection of potential varieties of wheat. Machine learning algorithms will be used for this purpose.
+
+This report contributes to the research project vPheno (virtual phenomics) at the Faculty of Bioscience at NMBU. The project, started in 2017, aims to help plant breeders reduce the time required to select better, high yield varieties of crops and speedup the process using image analysis techniques. Earlier results related to this work have been reported by \citet{burud_bleken}, \citet{grindbakken} and \citet{lied}. This report explores a different way of combining data, collected for different fields at different occasions. Moreover, including data for the year 2019 as input as well that has recently become available.\todo{Include 2020 data as well, probably or just use robot.}
 
 
 The objective of this report is to generate a machine learning model that can predict the grain yield of wheat based on the image data collected from the field at different times during the season.
@@ -416,7 +416,7 @@ We are grateful to \dots for \dots.
 %% The next two lines define the bibliography style to be used, and
 %% the bibliography file.
 \bibliographystyle{ACM-Reference-Format}
-\bibliography{\references.bib}
+\bibliography{references}
 
 \end{document}
 
