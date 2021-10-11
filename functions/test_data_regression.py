@@ -14,7 +14,7 @@ def test_data_regression(model, features, X_train, X_train_std, y_train, X_test,
     pred = []
     accuracy = {}
     accuracy_std = {}
-
+    accuracy_train = {}
     #==============================================================================
     # Make predictions for test set
     #==============================================================================
@@ -22,6 +22,7 @@ def test_data_regression(model, features, X_train, X_train_std, y_train, X_test,
     # Predict classes for samples in test set
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
+    y_pred_train = model.predict(X_train)
     
     success = False
     while not success:
@@ -33,8 +34,8 @@ def test_data_regression(model, features, X_train, X_train_std, y_train, X_test,
             pass
     
     # Training and predictions on standardised data
-    model.fit(X_train_std, y_train)
-    y_pred_std = model.predict(X_test_std)
+    # model.fit(X_train_std, y_train)
+    # y_pred_std = model.predict(X_test_std)
     
     success_std = False
     while not success_std:
@@ -50,19 +51,28 @@ def test_data_regression(model, features, X_train, X_train_std, y_train, X_test,
     #==============================================================================
     
     mse = mean_squared_error(y_test, y_pred, squared=True)
-    mse_std = mean_squared_error(y_test, y_pred_std, squared=True)
+    #mse_std = mean_squared_error(y_test, y_pred_std, squared=True)
+    mse_train = mean_squared_error(y_test, y_pred_train, squared=True)
+
     accuracy['MSE'] = mse
-    accuracy_std['MSE'] = mse_std
-    
+    #accuracy_std['MSE'] = mse_std
+    accuracy_train['MSE'] = mse_train
+
     rmse = mean_squared_error(y_test, y_pred, squared=False)
-    rmse_std = mean_squared_error(y_test, y_pred_std, squared=False)
+    #rmse_std = mean_squared_error(y_test, y_pred_std, squared=False)
+    rmse_train = mean_squared_error(y_test, y_pred_train, squared=False)
+
     accuracy['RMSE'] = rmse
-    accuracy_std['RMSE'] = rmse_std
+    #accuracy_std['RMSE'] = rmse_std
+    accuracy_train['RMSE'] = rmse_train
 
     r2 = r2_score(y_test, y_pred)
-    r2_std = r2_score(y_test, y_pred_std)
+    #r2_std = r2_score(y_test, y_pred_std)
+    r2_train = r2_score(y_test, y_pred_train)
+
     accuracy['R2 Score'] = r2
-    accuracy_std['R2 Score'] = r2_std
+    #accuracy_std['R2 Score'] = r2_std
+    accuracy_train['R2 Score'] = r2_train
 
     acc.append(accuracy)
     # Print accuracy computed from predictions on the test set
