@@ -1,6 +1,5 @@
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 
 import os
 import math
@@ -8,50 +7,38 @@ import datetime
 import numpy as np
 import pandas as pd
 from copy import copy
-from tqdm import tqdm
 
 # Dictionaries
 import json
 from pprint import pprint
 
-# Iterate in loops
-import itertools
-from itertools import zip_longest
-
-# Simpsons integration
-from numpy import trapz
-from scipy.integrate import simps
-
 # Visualisation
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# To display df nicely in loops
-from IPython.display import display 
+def plot_feat_imp(X_all = X, y_all = y, model_pipe = current_model, train_feat = training_features):
+    # Plotting feature importance
+    # Create arrays from feature importance and feature names
+    model_pipe.fit(X_all, y_all)
+    feature_importance = np.array(model_pipe.steps[1][1].feature_importances_)
+    feature_names = train_feat.copy()
+    model_name =  str(model_pipe).split('(')[-2].split('  ')[-1]
 
-
-def plot_feature_importance(importance, names, model):
-
-    #Create arrays from feature importance and feature names
-    feature_importance = np.array(importance)
-    feature_names = np.array(names)
-    model_type = str(model).split('(')[0]
-    #Create a DataFrame using a Dictionary
+    # Create a DataFrame using a Dictionary
     data={'feature_names':feature_names,'feature_importance':feature_importance}
-    fi_df = pd.DataFrame(data)
+    feat_imp_df = pd.DataFrame(data)
 
-    #Sort the DataFrame in order decreasing feature importance
-    fi_df.sort_values(by=['feature_importance'], ascending=False,inplace=True)
+    # Sort the DataFrame in order decreasing feature importance
+#     feat_imp_df.sort_values(by=['feature_importance'], ascending=False,inplace=True)
 
     #Define size of bar plot
-    plt.figure(figsize=(5,3.5))
+    plt.figure(figsize=(10,5))
     #Plot Searborn bar chart
-    sns.barplot(x=fi_df['feature_importance'], y=fi_df['feature_names'], )
+    sns.barplot(y=feat_imp_df['feature_importance'], x=feat_imp_df['feature_names'], palette = 'winter'  )
     #Add chart labels
-    plt.title(model_type + 'Feature Importance')
+    plt.title(model_name + ' Feature Importance')
+    plt.xticks(rotation=60)
     plt.xlabel('Feature Importance')
     plt.ylabel('Feature Names')
     # plt.savefig('Data/feature_importance_'+model_type+'.pdf',dpi=500, bbox_inches='tight')
     plt.show()
-    display(fi_df)
-    
