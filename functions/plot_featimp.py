@@ -92,10 +92,11 @@ def plot_feat_imp(feature_importance, model, train_feat, feature_group = 0, thre
 
 
         # Saving plots
-        export_plots = export_path+'/Feature_Importance_Feat_Grp_'+str(feature_group)+'/'+model_name_full+'/'
+        export_plots = export_path+'/Feature_Importance/'+'Feat_Grp_'+str(feature_group)+'/'+model_name_full+'/'
         os.makedirs(export_plots, exist_ok=True)
         if save_plot:
             # There was peoblem with saving plots in a loop where 66-33 ratio was used for same df
+            # Probably beacuse of to long names/path address
             # So, using try method to avoid errors and saving plots with slightly different names
             filename = '/'+str(save_suffix)+'-feat_grp_'+str(feature_group)+'.jpg'
             alt_filename = '/'+str(save_suffix)+'g'+str(feature_group)+'.jpg'

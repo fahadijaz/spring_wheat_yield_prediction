@@ -36,7 +36,7 @@ def save_results(model, agg_method, train_field, test_field,
                'DataTime': date_time}
     export_path = features_all[5]
 
-    filename = export_path + 'results_org.csv'
+    filename = export_path + 'results.csv'
 
     with open(filename, "a+") as csvfile:
         headers = results.keys()
