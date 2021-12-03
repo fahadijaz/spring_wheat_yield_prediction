@@ -18,6 +18,9 @@ import random
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+from functions.split_data import *
+
+
 def training_gkf_std(model, X, y, gkf=5):
     
     current_model = make_pipeline(StandardScaler(), model)
@@ -74,6 +77,7 @@ def training_regr(model, X_train, y_train, X_test, y_test, scatter_params):
     feature_group = scatter_params[4]
     marker_size = scatter_params[5]
     fig_size = scatter_params[6]
+    target_feature = scatter_params[7]
     
     model_name =  str(model).split('(')[0]
     model_name_full = ''.join([ c if c.isalnum() else "_" for c in str(model).replace(" ", "") ])
@@ -118,8 +122,12 @@ def training_regr(model, X_train, y_train, X_test, y_test, scatter_params):
         
         ax.set_title(model_name + ' ' + scatter_title,
                     fontdict = {'fontsize' : 11})
-        ax.set_xlabel('Predicted grain yield (kg/daa)')
-        ax.set_ylabel('Measured grain yield (kg/daa)')
+        if target_feature == 'Days2Maturity':       
+            ax.set_xlabel('Predicted days to maturity')
+            ax.set_ylabel('Measured days to maturity') 
+        elif target_feature == 'GrainYield':
+            ax.set_xlabel('Predicted grain yield (t/ha)')
+            ax.set_ylabel('Measured grain yield (t/ha)')
         text = model_name + '\n' + 'R\u00b2 = '+ R2_test_short + '\n' + 'RMSE = ' + RMSE_test_short
         ax.text(.01, .98, text, ha='left', va='top', weight=100, color='black', fontsize ='large', transform=ax.transAxes)
 
@@ -158,6 +166,40 @@ def training_regr(model, X_train, y_train, X_test, y_test, scatter_params):
     
     return feature_importance, RMSE_test, RMSE_train, R2_test, R2_train, GKF_CV, y_pred
 
+
+def environment_o2o(all_df_now, pd_all_df_now, train_, test_, year, training_features, target_features):
+    # Assigning names to df
+    assert len(all_df_now)==len(pd_all_df_now)
+    counter = 0
+    for x in all_df_now:
+        
+        locals()[x] = pd_all_df_now[counter].copy()
+        counter += 1
+        
+    train_str_list, test_str_list = list_test_train_df(all_df_now,
+                                                       train_field = train_, 
+                                                       test_field = test_, 
+                                                       year = year)
+    train_df_list = []
+    test_df_list = []
+    for x in train_str_list:
+        train_df_list.append(locals()[x])
+    for x in test_str_list:
+        test_df_list.append(locals()[x])
+
+    if len(train_str_list) > 0 and len(test_str_list) > 0:
+        train_df = pd.concat(train_df_list)
+        test_df = pd.concat(test_df_list)
+
+        X_train = train_df[training_features]
+        y_train = train_df[target_features].values.ravel()
+        X_test = test_df[training_features]
+        y_test = test_df[target_features].values.ravel()
+
+        return X_train, y_train, X_test, y_test, train_str_list, test_str_list
+    else:
+        return None
+                    
 
 def grid(Xtrain,
          ytrain,

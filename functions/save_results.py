@@ -21,6 +21,8 @@ def save_results(model, agg_method, train_field, test_field,
         train_feat.append('base_indices')
     if set(['Staur_Env', 'Vollebekk_Env']) <= set(features_all[0]): # environment variables
         train_feat.append('Environment_feature')
+    if len(train_feat) < 1:
+        train_feat = features_all[0].copy()
         
     results = {'Model': model,
                'Aggregation_method': agg_method,
@@ -75,7 +77,7 @@ def save_grid_results(list_zip, features_all=None):
     p10 = list_zip_list[13]
 
     
-    # features_all = [training_features,base_indices,spectral_indices_all,spectral_indices,weather_features,export_path]
+    # features_all = [training_features,base_indices,spectral_indices_all,spectral_indices,weather_features,export_path, agg_method]
     date_time = dt.now()
     train_feat = []
     if set(features_all[2]) <= set(features_all[0]): # spectral indices all
@@ -88,7 +90,8 @@ def save_grid_results(list_zip, features_all=None):
         train_feat.append('base_indices')
     if set(['Staur_Env', 'Vollebekk_Env']) <= set(features_all[0]): # environment variables
         train_feat.append('Environment_feature')
-        
+    if len(train_feat) < 3:
+        train_feat = features_all[0].copy()
         
     results = {'Model': model,
                'Pipeline': pipe,
@@ -104,13 +107,13 @@ def save_grid_results(list_zip, features_all=None):
                'Parameter_8': p8,
                'Parameter_9': p9,
                'Parameter_10': p10,
-               'Aggregation_method': agg_method,
+               'Aggregation_method': features_all[6],
                'Training_features': train_feat,
                'DataTime': date_time}
 
     export_path = features_all[5]
 
-    filename = export_path + 'results_loop_org.csv'
+    filename = export_path + 'results_GRID_org.csv'
 
     with open(filename, "a+") as csvfile:
         headers = results.keys()
