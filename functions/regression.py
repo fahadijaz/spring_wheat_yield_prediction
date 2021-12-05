@@ -103,7 +103,7 @@ def training_regr(model, X_train, y_train, X_test, y_test, scatter_params):
     print('RMSE Train:', RMSE_train, '      R2 Train:', R2_train)
     
     # Saving plots
-    export_plots = export_path+ '/Scatter_Plots/' +'/Feat_Grp_'+str(feature_group)+'/'+model_name_full+'/'
+    export_plots = export_path+ '/Scatr/' +'/Feat_Grp_'+str(feature_group)+'/'+model_name_full+'/'
     os.makedirs(export_plots, exist_ok=True)
     
     # Scatter plot of results
@@ -120,8 +120,10 @@ def training_regr(model, X_train, y_train, X_test, y_test, scatter_params):
         x = np.linspace(min_range, max_range, 50)
         ax.plot(x, x, 'r')
         
-        ax.set_title(model_name + ' ' + scatter_title,
-                    fontdict = {'fontsize' : 11})
+        # ax.set_title(model_name + ' ' + scatter_title,
+        #             fontdict = {'fontsize' : 11})
+        ax.set_title(model_name,
+            fontdict = {'fontsize' : 11})
         if target_feature == 'Days2Maturity':       
             ax.set_xlabel('Predicted days to maturity')
             ax.set_ylabel('Measured days to maturity') 
@@ -135,8 +137,8 @@ def training_regr(model, X_train, y_train, X_test, y_test, scatter_params):
             # There was peoblem with saving plots in a loop where 66-33 ratio was used for same df
             # Probably beacuse of to long names/path address
             # So, using try method to avoid errors and saving plots with slightly different names
-            filename = '/Scatter_'+str(scatter_title)+'-feat_grp_'+str(feature_group)+'.jpg'
-            alt_filename = '/Sct'+str(scatter_title)+'g'+str(feature_group)+'.jpg'
+            filename = '/'+model_name+str(scatter_title)+'-ft_grp_'+str(feature_group)+'.jpg'
+            alt_filename = '/'+model_name+str(scatter_title)+'g'+str(feature_group)+'.jpg'
             alt_filename_2 = '/'+str(random.randint(100, 999))
             success = False
             while not success:
